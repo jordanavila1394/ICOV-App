@@ -1,4 +1,4 @@
-package com.kabbodev.mongodb.fragments
+package com.icov.app.fragments
 
 import android.app.Dialog
 import android.os.Bundle
@@ -11,12 +11,12 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import com.kabbodev.mongodb.R
-import com.kabbodev.mongodb.activities.RegisterActivity
-import com.kabbodev.mongodb.activities.UpdateUserInfoActivity
-import com.kabbodev.mongodb.config.AppConfig
-import com.kabbodev.mongodb.database.UserMongoDb
-import com.kabbodev.mongodb.utils.Functions
+import com.icov.app.R
+import com.icov.app.activities.RegisterActivity
+import com.icov.app.activities.UpdateUserInfoActivity
+import com.icov.app.config.AppConfig
+import com.icov.app.database.UserMongoDb
+import com.icov.app.utils.Functions
 import io.realm.mongodb.App
 import io.realm.mongodb.AppConfiguration
 

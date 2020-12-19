@@ -1,4 +1,4 @@
-package com.kabbodev.mongodb
+package com.icov.app
 
 import org.junit.Test
 

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/app_name">
+
+        <Preference
+            android:defaultValue="en"
+            android:icon="@drawable/ic_language"
+            android:key="language"
+            android:summary="English"
+            android:title="@string/language_text" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/about">
+        <Preference
+            android:icon="@drawable/update_icon"
+            android:key="check_for_updates"
+            android:summary="@string/check_for_updates_summary_settings"
+            android:title="@string/check_for_updates_title_settings" />
+
+        <Preference
+            android:icon="@drawable/logo_icov_tr"
+            android:key="app_version"
+            android:summary="@string/loading"
+            android:title="@string/app_version" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/others">
+
+        <Preference
+            android:icon="@drawable/send_bug_report"
+            android:key="report_bug"
+            android:summary="@string/report_bug_summary"
+            android:title="@string/report_bug_title" />
+
+        <Preference
+            android:icon="@drawable/write_feedback"
+            android:key="send_feedback"
+            android:summary="@string/send_feedback_summary"
+            android:title="@string/send_feedback_title" />
+
+        <Preference
+            android:icon="@drawable/website_icon"
+            android:key="website"
+            android:summary="@string/website_summary"
+            android:title="@string/website_title" />
+
+        <Preference
+            android:icon="@drawable/privacy_and_policy"
+            android:key="privacy_policy"
+            android:summary="@string/privacy_policy_summary"
+            android:title="@string/privacy_policy_title" />
+
+        <Preference
+            android:icon="@drawable/terms_and_conditions"
+            android:key="terms_and_conditions"
+            android:summary="@string/terms_and_conditions_summary"
+            android:title="@string/terms_and_conditions_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

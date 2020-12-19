@@ -1,0 +1,162 @@
+<resources>
+    <string name="app_name">ICOV</string>
+
+    <!--    navigation drawer-->
+    <string name="home">Home</string>
+    <string name="my_account">My Account</string>
+    <string name="settings">Settings</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="share">Share This App</string>
+    <string name="log_out">Log Out</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!--    navigation drawer-->
+
+    <string name="share_intent_msg" formatted="false">%1$s - Install Now</string>
+
+    <!--    my account frag-->
+    <string name="acc_info">Account Information</string>
+    <string name="edit_acc_info">Edit your account information here</string>
+
+    <string name="user_info_text">User Info</string>
+    <string name="update">Update</string>
+    <!--    my account frag-->
+
+    <!--    password confirmation dialog-->
+    <string name="enter_pass_text">Please enter your password to change the email address.</string>
+    <string name="done_text">Done</string>
+    <!--    password confirmation dialog-->
+
+
+    <!--    settings pref-->
+    <array name="language_names">
+        <item>English</item>
+        <item>Italiano</item>
+    </array>
+
+    <string name="select_language">Select Language</string>
+    <string name="language_text">Language</string>
+
+    <string name="about">About</string>
+    <string name="others">Others</string>
+
+    <string name="website_title">Visit Website</string>
+    <string name="website_summary">Opens our website for more information</string>
+
+    <string name="update_available">New Update Available! Click here to update now!</string>
+    <string name="update_required">(Update Required)</string>
+
+    <string name="check_for_updates_title_settings">Check for updates</string>
+    <string name="check_for_updates_summary_settings">Your app is up to date</string>
+    <string name="app_version">App Version</string>
+    <string name="loading">loading!</string>
+    <string name="report_bug_title">Report Bugs</string>
+    <string name="report_bug_summary">Report bugs and send us. We will fix them.</string>
+    <string name="send_feedback_title">Send feedback</string>
+    <string name="send_feedback_summary">Help us to improve the app for you</string>
+    <string name="privacy_policy_title">Privacy Policy</string>
+    <string name="privacy_policy_summary">Opens our privacy and policy page</string>
+    <string name="terms_and_conditions_title">Terms and Conditions</string>
+    <string name="terms_and_conditions_summary">Opens our terms and conditions page</string>
+    <!--    settings pref-->
+
+    <!--    // Send Feedback Dialog-->
+    <string name="send_feedback">Send us your feedback</string>
+    <string name="email_feedback">Please give your email here</string>
+    <string name="satisfaction_feedback">Your overall satisfaction with our app</string>
+    <string name="leave_feedback">Please leave your feedback below</string>
+    <string name="body_feedback">Are you satisfied with the features and performance of our app? If you found out any bugs or problems in our app, please send us feedback to improve the app for you. Write here your feedback and SEND us. Thanks!</string>
+    <string name="very_bad">Very Bad</string>
+    <string name="bad">Bad</string>
+    <string name="average">Average</string>
+    <string name="good">Good</string>
+    <string name="very_good">Very Good</string>
+    <string name="send_text">SEND</string>
+    <string name="rating_empty">Feedback Rating is empty!</string>
+    <string name="body_text_empty">Body text is empty!</string>
+    <string name="email_empty">Email address is empty!</string>
+    <string name="redirecting_to_email">Redirecting to Email Provider! Kindly send it by accepting request!</string>
+    <!--    // Send Feedback Dialog-->
+
+    <!--    Report Bug Dialog-->
+    <string name="report_bugs_dialog_title">Report Bugs now</string>
+    <string name="leave_bug_report">Leave here about the details of bugs</string>
+    <string name="report_bug_dialog_body">Write here about the details of bugs. Like app crashing, function not working properly, or audio problem. Brief the bug or bugs.</string>
+    <string name="type_your_message_here">Type your message here</string>
+    <!--    Report Bug Dialog-->
+
+    <!--    // rate dialog-->
+    <string name="rate_dialog_title">Rate this app!</string>
+    <string name="rate_dialog_message">We work hard to serve you better and would love to know how would you rate our app. It won\'t take more than a minute. Thanks for your feedback and support! We appreciate it!</string>
+    <string name="rate_dialog_ok">Rate It Now</string>
+    <string name="rate_dialog_cancel">Remind Me Later</string>
+    <string name="rate_dialog_no">No, Thanks</string>
+    <!--    // rate dialog-->
+
+    <!--    Rate us dialog-->
+    <string name="rate_us_dialog_title">Your opinion matters to us!</string>
+    <string name="rate_us_dialog_body">We work hard to serve you better and would love to know how would you rate our app. It won\'t take more than a minute. Thanks for your feedback and support! We appreciate it!</string>
+    <string name="rate_us_dialog_rate_now">RATE IT\nNOW</string>
+    <string name="rate_us_dialog_no_thanks">NO,\nTHANKS</string>
+    <string name="rate_us_dialog_remind_later">REMIND\nME LATER</string>
+    <!--    Rate us dialog-->
+
+    <!--    on Back Pressed -->
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="process_delete" formatted="false">%1$s and it\'s all process will be terminated.</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
+    <!--    on Back Pressed -->
+
+    <!--    login process-->
+    <string name="first_name_text">First Name</string>
+    <string name="surname_text">Surname</string>
+    <string name="full_name_text">Full Name</string>
+    <string name="email_id_text">Email ID</string>
+    <string name="password_text">Password</string>
+    <string name="pass_text_8_chars">Password (at least 8 characters)</string>
+    <string name="confirm_password_text">Confirm Password</string>
+    <string name="incorrect_pass">Incorrect Password!</string>
+
+    <string name="old_pass_text">Old Password</string>
+    <string name="new_pass_text">New Password</string>
+    <string name="confirm_new_pass_text">Confirm New Password</string>
+
+    <string name="sign_in_text">Sign In</string>
+    <string name="sign_up_text">Sign Up</string>
+    <string name="sign_in_failed">Sign In Failed!</string>
+
+    <string name="invalid_email_address">Invalid Email Address!</string>
+    <string name="name_same">Previous and New First Name are Same!</string>
+    <string name="surname_same">Previous and New Surname are Same!</string>
+    <string name="pass_cant_empty">Required! Password text can\'t be empty!</string>
+    <string name="pass_at_least_8_char">Password must have at least 8 or more characters!</string>
+
+    <string name="name_both_updated">First Name and Surname Updated Successfully!</string>
+    <string name="name_updated">First Name Updated Successfully!</string>
+    <string name="surname_updated">Surname Updated Successfully!</string>
+
+    <string name="pass_updated">Password Updated Successfully!</string>
+    <string name="pass_same">Both Old and New Password are Same!</string>
+    <string name="password_doesnt_match">Password doesn\'t match!</string>
+
+    <string name="registering_text">Registering…</string>
+    <string name="successfully_registered_text">Successfully Registered! Now Logging…</string>
+    <string name="successfully_logged_in_text">Successfully Registered and Logged In! Wait Please…</string>
+    <string name="loading_text">Loading…</string>
+    <!--    login process-->
+
+    <!--    reset password -->
+    <string name="forgot_pass_text">Forgot Password?</string>
+    <string name="forgot_pass_body">Don\'t worry. We just need your registered email address and it\'s done!</string>
+    <string name="provide_email_here">Provide your registered email here</string>
+    <string name="recovery_email_sent">Recovery email sent successfully! Check your Inbox.</string>
+    <string name="reset_password_text">Reset Password</string>
+    <string name="go_back_text">&lt; &lt; Go Back</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--    reset password -->
+
+
+</resources>

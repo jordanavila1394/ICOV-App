@@ -1,4 +1,4 @@
-package com.kabbodev.mongodb.activities
+package com.icov.app.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -9,9 +9,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.kabbodev.mongodb.R
-import com.kabbodev.mongodb.fragments.SignInFragment
-import com.kabbodev.mongodb.fragments.SignUpFragment
+import com.icov.app.R
+import com.icov.app.fragments.SignInFragment
+import com.icov.app.fragments.SignUpFragment
 
 class RegisterActivity : AppCompatActivity() {
 

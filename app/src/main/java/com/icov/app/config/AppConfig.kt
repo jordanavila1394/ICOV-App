@@ -1,4 +1,4 @@
-package com.kabbodev.mongodb.config
+package com.icov.app.config
 
 class AppConfig {
     companion object {

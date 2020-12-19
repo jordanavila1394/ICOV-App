@@ -1,4 +1,4 @@
-package com.kabbodev.mongodb.database
+package com.icov.app.database
 
 class UserMongoDb {
     companion object {

@@ -1,4 +1,4 @@
-package com.kabbodev.mongodb.fragments
+package com.icov.app.fragments
 
 import android.graphics.Color
 import android.os.Bundle
@@ -17,10 +17,10 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
-import com.kabbodev.mongodb.R
-import com.kabbodev.mongodb.activities.MainActivity
-import com.kabbodev.mongodb.config.AppConfig
-import com.kabbodev.mongodb.utils.Functions
+import com.icov.app.R
+import com.icov.app.activities.MainActivity
+import com.icov.app.config.AppConfig
+import com.icov.app.utils.Functions
 import io.realm.mongodb.App
 import io.realm.mongodb.AppConfiguration
 import io.realm.mongodb.Credentials

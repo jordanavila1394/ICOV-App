@@ -1,11 +1,11 @@
-package com.kabbodev.mongodb.activities
+package com.icov.app.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import com.kabbodev.mongodb.R
-import com.kabbodev.mongodb.config.AppConfig
+import com.icov.app.R
+import com.icov.app.config.AppConfig
 import io.realm.Realm
 import io.realm.mongodb.App
 import io.realm.mongodb.AppConfiguration

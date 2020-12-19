@@ -1,4 +1,4 @@
-package com.kabbodev.mongodb.utils
+package com.icov.app.utils
 
 import android.app.Activity
 import android.app.Dialog
@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
-import com.kabbodev.mongodb.R
+import com.icov.app.R
 
 class Functions {
 

@@ -1,4 +1,4 @@
-package com.kabbodev.mongodb.activities
+package com.icov.app.activities
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -7,7 +7,7 @@ import android.webkit.WebView
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.kabbodev.mongodb.R
+import com.icov.app.R
 
 class PrivacyOrTermsActivity : AppCompatActivity() {
 

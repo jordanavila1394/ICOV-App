@@ -1,4 +1,4 @@
-package com.kabbodev.mongodb.activities
+package com.icov.app.activities
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -13,8 +13,8 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import android.widget.*
-import com.kabbodev.mongodb.R
-import com.kabbodev.mongodb.config.AppConfig
+import com.icov.app.R
+import com.icov.app.config.AppConfig
 import io.realm.mongodb.App
 import io.realm.mongodb.AppConfiguration
 

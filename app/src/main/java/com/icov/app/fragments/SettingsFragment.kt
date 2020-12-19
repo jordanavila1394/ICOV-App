@@ -1,8 +1,7 @@
-package com.kabbodev.mongodb.fragments
+package com.icov.app.fragments
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentSender
 import android.content.SharedPreferences
@@ -15,7 +14,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -26,9 +24,9 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.tasks.Task
-import com.kabbodev.mongodb.R
-import com.kabbodev.mongodb.activities.PrivacyOrTermsActivity
-import com.kabbodev.mongodb.utils.Functions
+import com.icov.app.R
+import com.icov.app.activities.PrivacyOrTermsActivity
+import com.icov.app.utils.Functions
 
 class SettingsFragment : PreferenceFragmentCompat() {
 

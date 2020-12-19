@@ -1,4 +1,4 @@
-package com.kabbodev.mongodb.activities
+package com.icov.app.activities
 
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
@@ -10,10 +10,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.kabbodev.mongodb.R
-import com.kabbodev.mongodb.fragments.UpdateNameFragment
-import com.kabbodev.mongodb.fragments.UpdatePasswordFragment
-import com.kabbodev.mongodb.utils.Functions
+import com.icov.app.R
+import com.icov.app.fragments.UpdateNameFragment
+import com.icov.app.fragments.UpdatePasswordFragment
+import com.icov.app.utils.Functions
 
 class UpdateUserInfoActivity : AppCompatActivity() {
 

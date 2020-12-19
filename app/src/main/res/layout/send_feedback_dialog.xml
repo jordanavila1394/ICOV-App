@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/slider_background">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="300dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/send_feedback_image" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/send_feedback"
+        android:textColor="@color/blue"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+
+    <EditText
+        android:id="@+id/user_email_feedback"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/email_feedback"
+        android:textColor="@color/green"
+        android:textColorHint="#99000000"
+        android:backgroundTint="@color/green"
+        android:inputType="textEmailAddress"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/satisfaction_feedback"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_email_feedback" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/leave_feedback"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_1_star" />
+
+    <EditText
+        android:id="@+id/send_feedback_text"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/slider_background"
+        android:elevation="6dp"
+        android:gravity="start"
+        android:textColor="#CC000000"
+        android:textColorHint="#99000000"
+        android:hint="@string/body_feedback"
+        android:inputType="textMultiLine"
+        android:nestedScrollingEnabled="true"
+        android:padding="8dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/layout_1_star"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/slider_background_version_2"
+        android:elevation="6dp"
+        android:padding="4dp"
+        android:text="@string/very_bad"
+        android:textAlignment="center"
+        android:textColor="@color/blue"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:drawableTopCompat="@drawable/one_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/layout_2_star"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/slider_background_version_2"
+        android:elevation="6dp"
+        android:padding="4dp"
+        android:text="@string/bad"
+        android:textAlignment="center"
+        android:textColor="@color/blue"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:drawableTopCompat="@drawable/two_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/layout_1_star"
+        app:layout_constraintStart_toEndOf="@+id/layout_1_star"
+        app:layout_constraintTop_toTopOf="@+id/layout_1_star" />
+
+    <TextView
+        android:id="@+id/layout_3_star"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/slider_background_version_2"
+        android:elevation="6dp"
+        android:padding="4dp"
+        android:text="@string/average"
+        android:textAlignment="center"
+        android:textColor="@color/blue"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:drawableTopCompat="@drawable/three_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/layout_2_star"
+        app:layout_constraintStart_toEndOf="@+id/layout_2_star"
+        app:layout_constraintTop_toTopOf="@+id/layout_2_star" />
+
+
+    <TextView
+        android:id="@+id/layout_4_star"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/slider_background_version_2"
+        android:elevation="6dp"
+        android:padding="4dp"
+        android:text="@string/good"
+        android:textAlignment="center"
+        android:textColor="@color/blue"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:drawableTopCompat="@drawable/four_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/layout_3_star"
+        app:layout_constraintStart_toEndOf="@+id/layout_3_star"
+        app:layout_constraintTop_toTopOf="@+id/layout_3_star" />
+
+    <TextView
+        android:id="@+id/layout_5_star"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/slider_background_version_2"
+        android:elevation="6dp"
+        android:padding="4dp"
+        android:text="@string/very_good"
+        android:textAlignment="center"
+        android:textColor="@color/blue"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:drawableTopCompat="@drawable/five_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/layout_4_star"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/layout_4_star"
+        app:layout_constraintTop_toTopOf="@+id/layout_4_star" />
+
+
+    <Button
+        android:id="@+id/send_feedback_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/blue"
+        android:text="@string/send_text"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/send_feedback_text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

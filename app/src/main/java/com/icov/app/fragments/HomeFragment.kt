@@ -1,4 +1,4 @@
-package com.kabbodev.mongodb.fragments
+package com.icov.app.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.kabbodev.mongodb.R
-import com.kabbodev.mongodb.database.UserMongoDb
+import com.icov.app.R
+import com.icov.app.database.UserMongoDb
 
 class HomeFragment : Fragment() {
     private val TAG = "HOME"
