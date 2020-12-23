@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.icov.app.R
 import com.icov.app.database.UserMongoDb
 
-class TakeAttendanceFragment: Fragment() {
+class AttendanceFragment: Fragment() {
     private val TAG = "ATTENDANCE"
 
     private lateinit var fullNameText: TextView
@@ -30,7 +30,7 @@ class TakeAttendanceFragment: Fragment() {
 
 
     private fun initializeVariables(view: View) {
-        fullNameText = view.findViewById(R.id.username)
+        fullNameText = view.findViewById(R.id.textExample)
 
     }
 

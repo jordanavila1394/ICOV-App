@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.HomeFragment">
+    tools:context=".fragments.AttendanceFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/textExample"
+        android:layout_width="match_parent"
+        android:layout_height="93dp"
+        android:fontFamily="@font/muli"
+        android:text="@string/edit_acc_info"
+        android:textColor="@color/red"
+        android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="131dp"
-        android:layout_height="130dp"
-        android:background="@drawable/shadow_circle"
-        android:text="@string/CircleButton"
-        android:textColor="#fff" />
 
 </FrameLayout>

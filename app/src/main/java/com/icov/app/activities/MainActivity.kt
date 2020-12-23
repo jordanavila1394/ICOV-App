@@ -23,6 +23,7 @@ import com.google.android.material.navigation.NavigationView
 import com.icov.app.R
 import com.icov.app.config.AppConfig
 import com.icov.app.database.UserMongoDb
+import com.icov.app.fragments.AttendanceFragment
 import com.icov.app.fragments.HomeFragment
 import com.icov.app.fragments.MyAccountFragment
 import com.icov.app.fragments.SettingsFragment
@@ -49,7 +50,8 @@ class MainActivity : AppCompatActivity() {
     private var currentFragment = -1
     private val HOME_FRAGMENT = 0
     private val MY_ACCOUNT_FRAGMENT = 1
-    private val SETTINGS_FRAGMENT = 2
+    private val ATTENDANCE_FRAGMENT = 2
+    private val SETTINGS_FRAGMENT = 3
 
     private lateinit var toolbar: Toolbar
     private lateinit var toggle: ActionBarDrawerToggle
@@ -170,6 +172,14 @@ class MainActivity : AppCompatActivity() {
                                 getString(R.string.my_account),
                                 MyAccountFragment(),
                                 MY_ACCOUNT_FRAGMENT
+                            )
+
+                        }
+                        R.id.nav_attendance -> {
+                            goToFragment(
+                                getString(R.string.attendance),
+                                AttendanceFragment(),
+                                ATTENDANCE_FRAGMENT
                             )
 
                         }
@@ -298,6 +308,8 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = title
         invalidateOptionsMenu()
         setFragment(fragment, fragmentNo)
+        Log.d(TAG, "SET FRAGMENT: ${title}  ${fragmentNo}")
+
     }
 
     private fun setFragment(fragment: Fragment, fragmentNo: Int) {

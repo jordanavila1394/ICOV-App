@@ -5,6 +5,8 @@
     <string name="home">Home</string>
     <string name="my_account">My Account</string>
     <string name="settings">Settings</string>
+    <string name="attendance">Take Attendance</string>
+
     <string name="rate_us">Rate Us</string>
     <string name="share">Share This App</string>
     <string name="log_out">Log Out</string>
