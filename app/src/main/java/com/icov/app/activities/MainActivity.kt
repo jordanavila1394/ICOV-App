@@ -23,10 +23,7 @@ import com.google.android.material.navigation.NavigationView
 import com.icov.app.R
 import com.icov.app.config.AppConfig
 import com.icov.app.database.UserMongoDb
-import com.icov.app.fragments.AttendanceFragment
-import com.icov.app.fragments.HomeFragment
-import com.icov.app.fragments.MyAccountFragment
-import com.icov.app.fragments.SettingsFragment
+import com.icov.app.fragments.*
 import com.icov.app.utils.Functions
 import hotchemi.android.rate.AppRate
 import io.realm.mongodb.App
@@ -51,7 +48,8 @@ class MainActivity : AppCompatActivity() {
     private val HOME_FRAGMENT = 0
     private val MY_ACCOUNT_FRAGMENT = 1
     private val ATTENDANCE_FRAGMENT = 2
-    private val SETTINGS_FRAGMENT = 3
+    private val NEWS_FRAGMENT = 3
+    private val SETTINGS_FRAGMENT = 4
 
     private lateinit var toolbar: Toolbar
     private lateinit var toggle: ActionBarDrawerToggle
@@ -180,6 +178,14 @@ class MainActivity : AppCompatActivity() {
                                 getString(R.string.attendance),
                                 AttendanceFragment(),
                                 ATTENDANCE_FRAGMENT
+                            )
+
+                        }
+                        R.id.nav_news -> {
+                            goToFragment(
+                                getString(R.string.news),
+                                NewsFragment(),
+                                NEWS_FRAGMENT
                             )
 
                         }
