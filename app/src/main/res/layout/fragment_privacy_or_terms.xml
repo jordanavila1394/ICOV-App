@@ -4,11 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.PrivacyOrTermsActivity">
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/app_bar_layout" />
+    tools:context=".fragments.PrivacyOrTermsFragment">
 
     <ImageView
         android:id="@+id/privacy_image"

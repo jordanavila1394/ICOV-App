@@ -10,6 +10,7 @@ import io.realm.Realm
 import io.realm.mongodb.App
 import io.realm.mongodb.AppConfiguration
 import io.realm.mongodb.User
+import kotlinx.coroutines.*
 
 class SplashActivity : AppCompatActivity() {
 
@@ -22,18 +23,19 @@ class SplashActivity : AppCompatActivity() {
         val app = App(AppConfiguration.Builder(AppConfig.REALM_APP_ID).build())
         val currentUser: User? = app.currentUser()
 
-        val handler = Handler()
-        handler.postDelayed({
-            val intent =
-                if (currentUser == null) {
-                    Intent(this@SplashActivity, RegisterActivity::class.java)
-                } else {
-                    Intent(this@SplashActivity, MainActivity::class.java)
-                }
-            startActivity(intent)
-            finish()
-        }, 1500)
+        GlobalScope.launch(Dispatchers.IO) {
+            delay(1500)
+            withContext(Dispatchers.Main) {
+                val intent =
+                    if (currentUser == null) {
+                        Intent(this@SplashActivity, RegisterActivity::class.java)
+                    } else {
+                        Intent(this@SplashActivity, MainActivity::class.java)
+                    }
+                startActivity(intent)
+                finish()
+            }
+        }
     }
-
 
 }

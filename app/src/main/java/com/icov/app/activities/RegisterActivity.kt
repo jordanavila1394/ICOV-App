@@ -6,37 +6,31 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.icov.app.R
+import com.icov.app.databinding.ActivityRegisterBinding
 import com.icov.app.fragments.SignInFragment
 import com.icov.app.fragments.SignUpFragment
 
 class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var registerViewPager: ViewPager2
-    private lateinit var tabLayout: TabLayout
+    private lateinit var bind: ActivityRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
-        initializeVariables()
+        bind = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(bind.root)
         setupTheme()
     }
 
-    private fun initializeVariables() {
-        registerViewPager = findViewById(R.id.register_view_pager)
-        tabLayout = findViewById(R.id.register_tab_layout)
-    }
-
     private fun setupTheme() {
-        tabLayout.addTab(tabLayout.newTab(), 0)
-        tabLayout.addTab(tabLayout.newTab(), 1)
-        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
+        bind.registerTabLayout.addTab(bind.registerTabLayout.newTab(), 0)
+        bind.registerTabLayout.addTab(bind.registerTabLayout.newTab(), 1)
+        bind.registerTabLayout.tabGravity = TabLayout.GRAVITY_FILL
 
         val adapter = RegisterAdapter(supportFragmentManager, lifecycle)
-        registerViewPager.adapter = adapter
+        bind.registerViewPager.adapter = adapter
 
         val tabConfigurationStrategy =
             TabLayoutMediator.TabConfigurationStrategy { tab: TabLayout.Tab, position: Int ->
@@ -46,7 +40,7 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
 
-        TabLayoutMediator(tabLayout, registerViewPager, tabConfigurationStrategy).attach()
+        TabLayoutMediator(bind.registerTabLayout, bind.registerViewPager, tabConfigurationStrategy).attach()
     }
 
     class RegisterAdapter (fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {

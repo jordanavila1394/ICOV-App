@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
@@ -12,7 +13,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import com.icov.app.R
 
-class Functions {
+class CommonFunctions {
 
     companion object {
 
@@ -31,7 +32,7 @@ class Functions {
 
         fun setFragment(
             context: Context,
-            parentFrameLayout: FrameLayout,
+            parentFragmentLayoutID: Int,
             fragment: Fragment,
             animOpen: Int,
             animExit: Int
@@ -39,7 +40,7 @@ class Functions {
             val fragmentTransaction: FragmentTransaction =
                 (context as FragmentActivity).supportFragmentManager.beginTransaction()
             fragmentTransaction.setCustomAnimations(animOpen, animExit)
-            fragmentTransaction.replace(parentFrameLayout.id, fragment)
+            fragmentTransaction.replace(parentFragmentLayoutID, fragment)
             fragmentTransaction.commit()
         }
 
@@ -60,7 +61,18 @@ class Functions {
             )
             return dialog
         }
-    }
 
+        fun hasPermissions(context: Context, permission: String): Boolean {
+            if (ContextCompat.checkSelfPermission(
+                    context,
+                    permission
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                return true
+            }
+            return false
+        }
+
+    }
 
 }

@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.AttendanceFragment">
 
-    <TextView
-        android:id="@+id/textExample"
-        android:layout_width="match_parent"
-        android:layout_height="93dp"
-        android:fontFamily="@font/muli"
-        android:text="@string/edit_acc_info"
-        android:textColor="@color/red"
-        android:textSize="16sp" />
 
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

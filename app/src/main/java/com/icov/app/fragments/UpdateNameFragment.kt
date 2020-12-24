@@ -5,9 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,20 +17,18 @@ import com.google.android.material.textfield.TextInputLayout
 import com.icov.app.R
 import com.icov.app.config.AppConfig
 import com.icov.app.database.UserMongoDb
-import com.icov.app.utils.Functions
+import com.icov.app.databinding.FragmentUpdateNameBinding
+import com.icov.app.utils.CommonFunctions
 import io.realm.mongodb.App
 import io.realm.mongodb.AppConfiguration
 import org.bson.Document
 
 class UpdateNameFragment : Fragment() {
 
-    private val TAG = "UPDATE_NAME"
+    private var _binding: FragmentUpdateNameBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var app: App
-
-    private lateinit var firstName: TextInputLayout
-    private lateinit var surname: TextInputLayout
-    private lateinit var updateBtn: Button
-
     private lateinit var loadingDialog: Dialog
     private lateinit var passwordConfirmationDialog: Dialog
     private lateinit var passwordText: TextInputLayout
@@ -42,23 +38,27 @@ class UpdateNameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_update_name, container, false)
-        initializeVariables(view)
+        _binding = FragmentUpdateNameBinding.inflate(inflater, container, false)
+        initializeVariables()
         setupTheme()
         setupClickListeners()
-        return view
+        return binding.root
     }
 
-    private fun initializeVariables(view: View) {
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun initializeVariables() {
         app = App(AppConfiguration.Builder(AppConfig.REALM_APP_ID).build())
-        firstName = view.findViewById(R.id.first_name)
-        surname = view.findViewById(R.id.surname)
-        updateBtn = view.findViewById(R.id.update)
         loadingDialog =
-            Functions.createDialog(requireContext(), R.layout.loading_progress_dialog, false)
-        passwordConfirmationDialog =
-            Functions.createDialog(requireContext(), R.layout.password_confirmation_dialog, true)
+            CommonFunctions.createDialog(requireContext(), R.layout.loading_progress_dialog, false)
+        passwordConfirmationDialog = CommonFunctions.createDialog(
+            requireContext(),
+            R.layout.password_confirmation_dialog,
+            true
+        )
         passwordText = passwordConfirmationDialog.findViewById(R.id.password)
         doneBtn = passwordConfirmationDialog.findViewById(R.id.done_btn)
     }
@@ -75,32 +75,29 @@ class UpdateNameFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
             }
         }
-        firstName.editText?.addTextChangedListener(textWatcher)
-        surname.editText?.addTextChangedListener(textWatcher)
+        binding.firstName.editText?.addTextChangedListener(textWatcher)
+        binding.surname.editText?.addTextChangedListener(textWatcher)
 
-        firstName.editText?.setText(UserMongoDb.firstName)
-        surname.editText?.setText(UserMongoDb.surname)
+        binding.firstName.editText?.setText(UserMongoDb.firstName)
+        binding.surname.editText?.setText(UserMongoDb.surname)
     }
 
     private fun setupClickListeners() {
-        updateBtn.setOnClickListener {
+        binding.update.setOnClickListener {
             checkFullName()
         }
     }
 
     private fun checkInputs() {
-        if (!TextUtils.isEmpty(firstName.editText?.text)) {
-            if (!TextUtils.isEmpty(surname.editText?.text)) {
-                updateBtn.isEnabled = true
-                updateBtn.setTextColor(resources.getColor(R.color.white))
-            } else {
-                updateBtn.isEnabled = false
-                updateBtn.setTextColor(Color.argb(50, 255, 255, 255))
-            }
-        } else {
-            updateBtn.isEnabled = false
-            updateBtn.setTextColor(Color.argb(50, 255, 255, 255))
+        if (binding.firstName.editText?.text!!.isNotEmpty() &&
+            binding.surname.editText?.text!!.isNotEmpty()
+        ) {
+            binding.update.isEnabled = true
+            binding.update.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            return
         }
+        binding.update.isEnabled = false
+        binding.update.setTextColor(Color.argb(50, 255, 255, 255))
     }
 
     private fun checkFullName() {
@@ -112,31 +109,31 @@ class UpdateNameFragment : Fragment() {
             customErrorIcon.intrinsicHeight
         )
 
-        if (firstName.editText?.text.toString() != UserMongoDb.firstName) {
-            firstName.isErrorEnabled = false
-            surname.isErrorEnabled = false
+        if (binding.firstName.editText?.text.toString() != UserMongoDb.firstName) {
+            binding.firstName.isErrorEnabled = false
+            binding.surname.isErrorEnabled = false
 
-            if (surname.editText?.text.toString() != UserMongoDb.surname) {
-                surname.isErrorEnabled = false
+            if (binding.surname.editText?.text.toString() != UserMongoDb.surname) {
+                binding.surname.isErrorEnabled = false
                 checkPassword(updateFirstName = true, updateSurname = true, customErrorIcon)
             } else {
                 checkPassword(updateFirstName = true, updateSurname = false, customErrorIcon)
             }
 
         } else {
-            if (surname.editText?.text.toString() != UserMongoDb.surname) {
-                firstName.isErrorEnabled = false
-                surname.isErrorEnabled = false
+            if (binding.surname.editText?.text.toString() != UserMongoDb.surname) {
+                binding.firstName.isErrorEnabled = false
+                binding.surname.isErrorEnabled = false
                 checkPassword(updateFirstName = false, updateSurname = true, customErrorIcon)
 
             } else {
-                firstName.isErrorEnabled = true
-                firstName.error = getString(R.string.name_same)
-                firstName.errorIconDrawable = customErrorIcon
+                binding.firstName.isErrorEnabled = true
+                binding.firstName.error = getString(R.string.name_same)
+                binding.firstName.errorIconDrawable = customErrorIcon
 
-                surname.isErrorEnabled = true
-                surname.error = getString(R.string.surname_same)
-                surname.errorIconDrawable = customErrorIcon
+                binding.surname.isErrorEnabled = true
+                binding.surname.error = getString(R.string.surname_same)
+                binding.surname.errorIconDrawable = customErrorIcon
             }
         }
 
@@ -150,7 +147,7 @@ class UpdateNameFragment : Fragment() {
         passwordConfirmationDialog.show()
 
         doneBtn.setOnClickListener {
-            if (!TextUtils.isEmpty(passwordText.editText?.text)) {
+            if (passwordText.editText?.text!!.isNotEmpty()) {
                 passwordText.isErrorEnabled = false
 
                 if (passwordText.editText?.length()!! >= 8) {
@@ -183,8 +180,8 @@ class UpdateNameFragment : Fragment() {
     }
 
     private fun updateDatabase(updateFirstName: Boolean, updateSurname: Boolean) {
-        val firstNameValue = firstName.editText?.text.toString()
-        val surnameValue = surname.editText?.text.toString()
+        val firstNameValue = binding.firstName.editText?.text.toString()
+        val surnameValue = binding.surname.editText?.text.toString()
 
         val user = app.currentUser()!!
         val mongoClient = user.getMongoClient("mongodb-atlas")
@@ -199,47 +196,43 @@ class UpdateNameFragment : Fragment() {
 
         mongoCollection.findOneAndUpdate(queryFilter, updateDocument).getAsync { result ->
             if (result.isSuccess) {
-                    Log.d(TAG, "successfully updated a document.")
 
-                    if (updateFirstName) {
-                        if (updateSurname) {
-                            Log.d(TAG, "successfully updated first name and surname.")
-                            Toast.makeText(
-                                requireContext(),
-                                getString(R.string.name_both_updated),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            Log.d(TAG, "successfully updated first name.")
-                            Toast.makeText(
-                                requireContext(),
-                                getString(R.string.name_updated),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    } else {
-                        Log.d(TAG, "successfully updated surname.")
+                if (updateFirstName) {
+                    if (updateSurname) {
                         Toast.makeText(
                             requireContext(),
-                            getString(R.string.surname_updated),
+                            getString(R.string.name_both_updated),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.name_updated),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    UserMongoDb.firstName = firstNameValue
-                    UserMongoDb.surname = surnameValue
-                    UserMongoDb.fullName = "$firstNameValue $surnameValue"
-
-                    loadingDialog.dismiss()
-                    requireActivity().finish()
 
                 } else {
-                    Log.d(TAG, "did not update a document.")
                     Toast.makeText(
                         requireContext(),
-                        "Failed to update ${result.error}",
+                        getString(R.string.surname_updated),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+                UserMongoDb.firstName = firstNameValue
+                UserMongoDb.surname = surnameValue
+                UserMongoDb.fullName = "$firstNameValue $surnameValue"
+
+                loadingDialog.dismiss()
+                requireActivity().finish()
+
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Failed to update ${result.error}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
     }

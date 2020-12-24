@@ -7,27 +7,21 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
-import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
-import androidx.fragment.app.Fragment
-import com.google.android.material.navigation.NavigationView
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.icov.app.R
 import com.icov.app.config.AppConfig
 import com.icov.app.database.UserMongoDb
-import com.icov.app.fragments.AttendanceFragment
-import com.icov.app.fragments.HomeFragment
-import com.icov.app.fragments.MyAccountFragment
-import com.icov.app.fragments.SettingsFragment
-import com.icov.app.utils.Functions
+import com.icov.app.databinding.ActivityMainBinding
+import com.icov.app.utils.CommonFunctions
 import hotchemi.android.rate.AppRate
 import io.realm.mongodb.App
 import io.realm.mongodb.AppConfiguration
@@ -35,11 +29,14 @@ import io.realm.mongodb.User
 import io.realm.mongodb.mongo.MongoClient
 import io.realm.mongodb.mongo.MongoCollection
 import io.realm.mongodb.mongo.MongoDatabase
+import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.nav_header_main.view.*
 import org.bson.Document
 
-
 class MainActivity : AppCompatActivity() {
-    private val TAG = "MAIN_ACTIVITY"
+
+    private lateinit var bind: ActivityMainBinding
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     private lateinit var app: App
     private lateinit var user: User
@@ -47,28 +44,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mongoDatabase: MongoDatabase
     private lateinit var mongoCollection: MongoCollection<Document>
 
-    private var currentFragment = -1
-    private val HOME_FRAGMENT = 0
-    private val MY_ACCOUNT_FRAGMENT = 1
-    private val ATTENDANCE_FRAGMENT = 2
-    private val SETTINGS_FRAGMENT = 3
-
-    private lateinit var toolbar: Toolbar
-    private lateinit var toggle: ActionBarDrawerToggle
-    private lateinit var drawerLayout: DrawerLayout
-    private lateinit var navView: NavigationView
-    private lateinit var menuItem: MenuItem
-
     private lateinit var loadingDialog: Dialog
     private lateinit var rateUsDialog: Dialog
 
-    // nav header
-    private lateinit var fullNameDrawer: TextView
-    private lateinit var emailDrawer: TextView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        bind = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(bind.root)
         initializeVariables()
         setupTheme()
         setupClickListeners()
@@ -76,11 +58,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
-        if (fullNameDrawer.text.toString() != UserMongoDb.fullName) {
-            fullNameDrawer.text = UserMongoDb.fullName
+        if (bind.navView.getHeaderView(0).full_name_drawer.text.toString() != UserMongoDb.fullName) {
+            bind.navView.getHeaderView(0).full_name_drawer.text = UserMongoDb.fullName
         }
-
     }
 
     private fun initializeVariables() {
@@ -89,29 +69,13 @@ class MainActivity : AppCompatActivity() {
         mongoClient = user.getMongoClient("mongodb-atlas")
         mongoDatabase = mongoClient.getDatabase("icovDB")
         mongoCollection = mongoDatabase.getCollection("users")
-
-        toolbar = findViewById(R.id.toolbar)
-        drawerLayout = findViewById(R.id.drawer_layout)
-        navView = findViewById(R.id.nav_view)
-
-        fullNameDrawer = navView.getHeaderView(0).findViewById(R.id.full_name_drawer)
-        emailDrawer = navView.getHeaderView(0).findViewById(R.id.email_id_drawer)
-
-        loadingDialog = Functions.createDialog(this, R.layout.loading_progress_dialog, false)
-        rateUsDialog = Functions.createDialog(this, R.layout.rate_us_dialog, true)
+        loadingDialog = CommonFunctions.createDialog(this, R.layout.loading_progress_dialog, false)
+        rateUsDialog = CommonFunctions.createDialog(this, R.layout.rate_us_dialog, true)
     }
 
     private fun setupTheme() {
-        setSupportActionBar(toolbar)
-        toggle = ActionBarDrawerToggle(
-            this,
-            drawerLayout,
-            toolbar,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
-        )
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
+        setSupportActionBar(bind.include.toolbar)
+        setupNavigationDrawer()
 
         // app rate
         AppRate
@@ -124,13 +88,10 @@ class MainActivity : AppCompatActivity() {
         AppRate.showRateDialogIfMeetsConditions(this)
         // app rate
 
-        goToFragment(getString(R.string.app_name), HomeFragment(), HOME_FRAGMENT)
-
         val queryFilter = Document("user_id", user.id)
         mongoCollection
             .findOne(queryFilter)?.getAsync { result ->
                 if (result.isSuccess) {
-                    Log.d(TAG, "successfully found a document: ${result.get()}")
                     val firstNameValue = result.get().getString("name")
                     val surnameValue = result.get().getString("surname")
 
@@ -140,72 +101,61 @@ class MainActivity : AppCompatActivity() {
                     UserMongoDb.email = result.get().getString("email")
                     UserMongoDb.password = result.get().getString("password")
 
-                    fullNameDrawer.text = UserMongoDb.fullName
-                    emailDrawer.text = UserMongoDb.email
+                    bind.navView.getHeaderView(0).full_name_drawer.text = UserMongoDb.fullName
+                    bind.navView.getHeaderView(0).email_id_drawer.text = UserMongoDb.email
                 } else {
-                    Log.d(TAG, "Failed to find document with: ${result.error}")
+                    Log.d("Error", "Failed to find document with: ${result.error}")
                 }
             }
     }
 
-    private fun setupClickListeners() {
-        navView.setNavigationItemSelectedListener { item ->
-            val drawer: DrawerLayout = findViewById(R.id.drawer_layout)
-            drawer.closeDrawer(GravityCompat.START)
-            menuItem = item
+    private fun setupNavigationDrawer() {
+        val navController = findNavController(R.id.nav_host_fragment)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_home,
+                R.id.nav_my_account,
+                R.id.nav_attendance,
+                R.id.nav_settings,
+                R.id.nav_rate_us,
+                R.id.nav_share,
+                R.id.nav_log_out
+            ), bind.drawerLayout
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        bind.navView.setupWithNavController(navController)
 
-            drawer.addDrawerListener(object : SimpleDrawerListener() {
-                override fun onDrawerClosed(drawerView: View) {
-                    super.onDrawerClosed(drawerView)
-
-                    when (menuItem.itemId) {
-                        R.id.nav_home -> {
-                            invalidateOptionsMenu()
-                            goToFragment(
-                                getString(R.string.app_name),
-                                HomeFragment(),
-                                HOME_FRAGMENT
-                            )
-                        }
-                        R.id.nav_my_account -> {
-                            goToFragment(
-                                getString(R.string.my_account),
-                                MyAccountFragment(),
-                                MY_ACCOUNT_FRAGMENT
-                            )
-
-                        }
-                        R.id.nav_attendance -> {
-                            goToFragment(
-                                getString(R.string.attendance),
-                                AttendanceFragment(),
-                                ATTENDANCE_FRAGMENT
-                            )
-
-                        }
-                        R.id.nav_settings -> {
-                            goToFragment(
-                                getString(R.string.settings),
-                                SettingsFragment(),
-                                SETTINGS_FRAGMENT
-                            )
-                        }
-                        R.id.nav_rate_us -> {
-                            rateUsDialog.show()
-                        }
-                        R.id.nav_share -> {
-                            shareAppFun()
-                        }
-                        R.id.nav_log_out -> {
-                            logOut()
-                        }
-                    }
-
-                    drawer.removeDrawerListener(this)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.updateUserInfoFragment) {
+                supportActionBar?.hide()
+            } else {
+                if (!supportActionBar!!.isShowing) {
+                    supportActionBar?.show()
                 }
-            })
+            }
+        }
+
+        bind.navView.menu.findItem(R.id.nav_rate_us).setOnMenuItemClickListener {
+            bind.drawerLayout.closeDrawer(GravityCompat.START)
+            rateUsDialog.show()
             true
         }
+
+        bind.navView.menu.findItem(R.id.nav_share).setOnMenuItemClickListener {
+            bind.drawerLayout.closeDrawer(GravityCompat.START)
+            shareAppFun()
+            true
+        }
+
+        bind.navView.menu.findItem(R.id.nav_log_out).setOnMenuItemClickListener {
+            bind.drawerLayout.closeDrawer(GravityCompat.START)
+            logOut()
+            true
+        }
+
+    }
+
+    private fun setupClickListeners() {
         rateUsDialog.findViewById<TextView>(R.id.rate_now_btn).setOnClickListener {
             rateAppFun()
         }
@@ -215,6 +165,11 @@ class MainActivity : AppCompatActivity() {
         rateUsDialog.findViewById<TextView>(R.id.remind_me_later_btn).setOnClickListener {
             rateUsDialog.dismiss()
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
     private fun rateAppFun() {
@@ -257,8 +212,7 @@ class MainActivity : AppCompatActivity() {
         app.currentUser()?.logOutAsync() { result ->
             if (result.isSuccess) {
                 loadingDialog.dismiss()
-                Functions.startIntent(this, RegisterActivity::class.java, true)
-                Log.d(TAG, "Successfully logged out.")
+                CommonFunctions.startIntent(this, RegisterActivity::class.java, true)
             } else {
                 loadingDialog.dismiss()
                 Toast.makeText(
@@ -266,63 +220,33 @@ class MainActivity : AppCompatActivity() {
                     "Failed to log out, error: ${result.error}",
                     Toast.LENGTH_SHORT
                 ).show()
-                Log.d(TAG, "Failed to log out, error: ${result.error}")
             }
         }
     }
 
     override fun onBackPressed() {
-        val drawer: DrawerLayout = findViewById(R.id.drawer_layout)
+        if (bind.navView.checkedItem?.itemId == R.id.nav_home) {
+            val clickListener: DialogInterface.OnClickListener =
+                DialogInterface.OnClickListener { _, _ ->
+                    finishAndRemoveTask()
+                    super.onBackPressed()
+                }
 
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START)
-        } else {
-            if (currentFragment == HOME_FRAGMENT) {
-                val clickListener: DialogInterface.OnClickListener =
-                    DialogInterface.OnClickListener { dialogInterface, i ->
-                        finishAndRemoveTask()
-                        super.onBackPressed()
-                    }
-
-                val alertDialog: AlertDialog = AlertDialog.Builder(this@MainActivity)
-                    .setTitle(getString(R.string.are_you_sure))
-                    .setMessage(
-                        String.format(
-                            getString(R.string.process_delete),
-                            getString(R.string.app_name)
-                        )
+            AlertDialog.Builder(this@MainActivity)
+                .setTitle(getString(R.string.are_you_sure))
+                .setMessage(
+                    String.format(
+                        getString(R.string.process_delete),
+                        getString(R.string.app_name)
                     )
-                    .setPositiveButton(getString(R.string.ok), clickListener)
-                    .setNegativeButton(getString(R.string.cancel), null)
-                    .show()
-
-            } else {
-                invalidateOptionsMenu()
-                goToFragment(getString(R.string.app_name), HomeFragment(), HOME_FRAGMENT)
-            }
+                )
+                .setPositiveButton(getString(R.string.ok), clickListener)
+                .setNegativeButton(getString(R.string.cancel), null)
+                .show()
+            return
         }
-    }
+        super.onBackPressed()
 
-    private fun goToFragment(title: String, fragment: Fragment, fragmentNo: Int) {
-        supportActionBar?.setDisplayShowTitleEnabled(true)
-        supportActionBar?.title = title
-        invalidateOptionsMenu()
-        setFragment(fragment, fragmentNo)
-        Log.d(TAG, "SET FRAGMENT: ${title}  ${fragmentNo}")
-
-    }
-
-    private fun setFragment(fragment: Fragment, fragmentNo: Int) {
-        if (fragmentNo != currentFragment) {
-            currentFragment = fragmentNo
-            navView.menu.getItem(fragmentNo).isChecked = true
-
-            supportFragmentManager
-                .beginTransaction()
-                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                .replace(R.id.main_frame_layout, fragment)
-                .commit()
-        }
     }
 
 }

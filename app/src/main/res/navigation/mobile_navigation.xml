@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.icov.app.fragments.HomeFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_my_account"
+        android:name="com.icov.app.fragments.MyAccountFragment"
+        android:label="@string/my_account"
+        tools:layout="@layout/fragment_my_account">
+
+        <action
+            android:id="@+id/action_nav_my_account_to_updateUserInfoFragment"
+            app:destination="@id/updateUserInfoFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/updateUserInfoFragment"
+        android:name="com.icov.app.fragments.UpdateUserInfoFragment"
+        android:label="Update User"
+        tools:layout="@layout/fragment_update_user_info" />
+
+    <fragment
+        android:id="@+id/nav_attendance"
+        android:name="com.icov.app.fragments.AttendanceFragment"
+        android:label="@string/attendance"
+        tools:layout="@layout/fragment_attendance" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.icov.app.fragments.SettingsFragment"
+        android:label="@string/settings">
+        <action
+            android:id="@+id/action_nav_settings_to_privacyOrTermsFragment"
+            app:destination="@id/privacyOrTermsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/privacyOrTermsFragment"
+        android:name="com.icov.app.fragments.PrivacyOrTermsFragment"
+        tools:layout="@layout/fragment_privacy_or_terms">
+
+        <argument
+            android:name="type"
+            app:argType="string" />
+
+    </fragment>
+
+</navigation>

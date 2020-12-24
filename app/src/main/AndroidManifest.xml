@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.icov.app">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,12 +14,6 @@
         android:theme="@style/CustomTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name="com.icov.app.activities.UpdateUserInfoActivity"
-            android:theme="@style/CustomTheme.NoActionBar"/>
-        <activity
-            android:name="com.icov.app.activities.PrivacyOrTermsActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/CustomTheme.NoActionBar" />
         <activity
             android:name="com.icov.app.activities.SplashActivity"
             android:screenOrientation="portrait"

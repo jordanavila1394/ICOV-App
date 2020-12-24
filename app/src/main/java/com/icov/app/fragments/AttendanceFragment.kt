@@ -1,41 +1,33 @@
 package com.icov.app.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.icov.app.R
-import com.icov.app.database.UserMongoDb
+import androidx.fragment.app.Fragment
+import com.icov.app.databinding.FragmentAttendanceBinding
 
 class AttendanceFragment: Fragment() {
-    private val TAG = "ATTENDANCE"
 
-    private lateinit var fullNameText: TextView
+    private var _binding: FragmentAttendanceBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_attendance, container, false)
-        initializeVariables(view)
-        return view
-    }
-
-    override fun onStart() {
-        super.onStart()
+        _binding = FragmentAttendanceBinding.inflate(inflater, container, false)
         setupTheme()
+        setupClickListeners()
+        return binding.root
     }
 
-
-    private fun initializeVariables(view: View) {
-        fullNameText = view.findViewById(R.id.textExample)
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setupTheme() {
-        fullNameText.text = UserMongoDb.fullName
 
     }
 
