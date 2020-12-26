@@ -2,7 +2,6 @@ package com.icov.app.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.icov.app.R
 import com.icov.app.config.AppConfig

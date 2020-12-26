@@ -83,9 +83,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         termsAndConditions = findPreference("terms_and_conditions")!!
 
         feedBackDialog =
-            CommonFunctions.createDialog(requireContext(), R.layout.send_feedback_dialog, true)
+            CommonFunctions.createDialog(requireContext(), R.layout.send_feedback_dialog, R.drawable.slider_background, true)
         reportBugDialog =
-            CommonFunctions.createDialog(requireContext(), R.layout.report_bug_dialog, true)
+            CommonFunctions.createDialog(requireContext(), R.layout.report_bug_dialog, R.drawable.slider_background, true)
 
         feedback1star = feedBackDialog.findViewById(R.id.layout_1_star)
         feedback2star = feedBackDialog.findViewById(R.id.layout_2_star)

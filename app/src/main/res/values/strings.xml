@@ -6,13 +6,12 @@
     <string name="my_account">My Account</string>
     <string name="settings">Settings</string>
     <string name="attendance">Take Attendance</string>
+    <string name="calendar">Calendar</string>
 
     <string name="rate_us">Rate Us</string>
     <string name="share">Share This App</string>
     <string name="log_out">Log Out</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <!--    navigation drawer-->
 
     <string name="share_intent_msg" formatted="false">%1$s - Install Now</string>
@@ -32,12 +31,7 @@
 
 
     <!--    settings pref-->
-    <array name="language_names">
-        <item>English</item>
-        <item>Italiano</item>
-    </array>
 
-    <string name="select_language">Select Language</string>
     <string name="language_text">Language</string>
 
     <string name="about">About</string>
@@ -85,7 +79,6 @@
     <string name="report_bugs_dialog_title">Report Bugs now</string>
     <string name="leave_bug_report">Leave here about the details of bugs</string>
     <string name="report_bug_dialog_body">Write here about the details of bugs. Like app crashing, function not working properly, or audio problem. Brief the bug or bugs.</string>
-    <string name="type_your_message_here">Type your message here</string>
     <!--    Report Bug Dialog-->
 
     <!--    // rate dialog-->
@@ -127,13 +120,11 @@
 
     <string name="sign_in_text">Sign In</string>
     <string name="sign_up_text">Sign Up</string>
-    <string name="sign_in_failed">Sign In Failed!</string>
 
     <string name="invalid_email_address">Invalid Email Address!</string>
     <string name="name_same">Previous and New First Name are Same!</string>
     <string name="surname_same">Previous and New Surname are Same!</string>
     <string name="pass_cant_empty">Required! Password text can\'t be empty!</string>
-    <string name="pass_at_least_8_char">Password must have at least 8 or more characters!</string>
 
     <string name="name_both_updated">First Name and Surname Updated Successfully!</string>
     <string name="name_updated">First Name Updated Successfully!</string>
@@ -156,24 +147,15 @@
     <string name="recovery_email_sent">Recovery email sent successfully! Check your Inbox.</string>
     <string name="reset_password_text">Reset Password</string>
     <string name="go_back_text">&lt; &lt; Go Back</string>
+    <!--    reset password -->
+
+
+    <string name="clock_in">Clock in</string>
+    <string name="clock_out">Clock Out</string>
+    <string name="clock_in_time" formatted="false">Clock in at %1$s</string>
+    <string name="clock_out_time" formatted="false">Clock out at %1$s</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="CircleButton">0</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <!--    reset password -->
 
 
 </resources>

@@ -5,39 +5,34 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.icov.app.models.UserMongoDb
-import com.icov.app.databinding.FragmentHomeBinding
+import com.icov.app.databinding.FragmentCalendarBinding
 
-class HomeFragment : Fragment() {
+class CalendarFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentCalendarBinding.inflate(inflater, container, false)
+        setupTheme()
         setupClickListeners()
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        setupTheme()
+    private fun setupTheme() {
+
+    }
+
+    private fun setupClickListeners() {
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun setupTheme() {
-        binding.username.text = UserMongoDb.fullName
-    }
-
-    private fun setupClickListeners() {
-
     }
 
 }

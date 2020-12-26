@@ -21,7 +21,7 @@ class PrivacyOrTermsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentPrivacyOrTermsBinding.inflate(inflater, container, false)
         setupTheme()
         return binding.root

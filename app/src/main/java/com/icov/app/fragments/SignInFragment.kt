@@ -30,7 +30,7 @@ class SignInFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSignInBinding.inflate(inflater, container, false)
         setupTheme()
         setupClickListeners()
@@ -138,7 +138,7 @@ class SignInFragment : Fragment() {
                     } else {
                         binding.signInProgressBar.visibility = View.INVISIBLE
                         binding.signInBtn.isEnabled = true
-                        binding.signInBtn.setTextColor(resources.getColor(R.color.white))
+                        binding.signInBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                         Toast.makeText(
                             requireContext(),
                             result.error.toString(),

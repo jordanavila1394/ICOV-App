@@ -4,10 +4,8 @@
     <color name="darkBlue">#1a1a2e</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="grey">#BDBDBD</color>
     <color name="green">#1CB123</color>
     <color name="red">#D32F2F</color>
-    <color name="yellow">#FBC02D</color>
     <color name="recyclerViewBackground">#d6d6d6</color>
 
 </resources>

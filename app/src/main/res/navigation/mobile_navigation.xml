@@ -2,7 +2,6 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_home">
 
     <fragment
@@ -37,7 +36,17 @@
         android:id="@+id/nav_attendance"
         android:name="com.icov.app.fragments.AttendanceFragment"
         android:label="@string/attendance"
-        tools:layout="@layout/fragment_attendance" />
+        tools:layout="@layout/fragment_attendance">
+
+        <action
+            android:id="@+id/action_nav_attendance_to_calendarFragment"
+            app:destination="@id/calendarFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_settings"
@@ -62,5 +71,10 @@
             app:argType="string" />
 
     </fragment>
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.icov.app.fragments.CalendarFragment"
+        android:label="@string/calendar"
+        tools:layout="@layout/fragment_calendar" />
 
 </navigation>

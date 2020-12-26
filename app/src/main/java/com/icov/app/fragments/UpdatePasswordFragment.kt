@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.icov.app.R
 import com.icov.app.config.AppConfig
-import com.icov.app.database.UserMongoDb
+import com.icov.app.models.UserMongoDb
 import com.icov.app.databinding.FragmentUpdatePasswordBinding
 import com.icov.app.utils.CommonFunctions
 import io.realm.mongodb.App
@@ -31,7 +31,7 @@ class UpdatePasswordFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentUpdatePasswordBinding.inflate(inflater, container, false)
         initializeVariables()
         setupTheme()
@@ -47,7 +47,7 @@ class UpdatePasswordFragment : Fragment() {
     private fun initializeVariables() {
         app = App(AppConfiguration.Builder(AppConfig.REALM_APP_ID).build())
         loadingDialog =
-            CommonFunctions.createDialog(requireContext(), R.layout.loading_progress_dialog, false)
+            CommonFunctions.createDialog(requireContext(), R.layout.loading_progress_dialog, R.drawable.progress_circle,false)
     }
 
     private fun setupTheme() {

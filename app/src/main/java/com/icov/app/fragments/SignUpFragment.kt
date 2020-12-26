@@ -30,7 +30,7 @@ class SignUpFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSignUpBinding.inflate(inflater, container, false)
         setupTheme()
         setupClickListeners()
@@ -145,7 +145,7 @@ class SignUpFragment : Fragment() {
                                     getString(R.string.registering_text)
                                 binding.signUpProgressBar.visibility = View.INVISIBLE
                                 binding.signUpBtn.isEnabled = true
-                                binding.signUpBtn.setTextColor(resources.getColor(R.color.white))
+                                binding.signUpBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                                 Toast.makeText(
                                     requireContext(),
                                     result.error.toString(),
@@ -158,7 +158,7 @@ class SignUpFragment : Fragment() {
                     binding.signUpProgressText.text = getString(R.string.registering_text)
                     binding.signUpProgressBar.visibility = View.INVISIBLE
                     binding.signUpBtn.isEnabled = true
-                    binding.signUpBtn.setTextColor(resources.getColor(R.color.white))
+                    binding.signUpBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                     Toast.makeText(
                         requireContext(),
                         result.error.toString(),
@@ -196,7 +196,7 @@ class SignUpFragment : Fragment() {
                     binding.signUpProgressText.text = getString(R.string.registering_text)
                     binding.signUpProgressBar.visibility = View.INVISIBLE
                     binding.signUpBtn.isEnabled = true
-                    binding.signUpBtn.setTextColor(resources.getColor(R.color.white))
+                    binding.signUpBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                     Toast.makeText(
                         requireContext(),
                         result.error.toString(),

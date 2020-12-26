@@ -12,7 +12,7 @@ import androidx.navigation.Navigation
 import com.icov.app.R
 import com.icov.app.activities.RegisterActivity
 import com.icov.app.config.AppConfig
-import com.icov.app.database.UserMongoDb
+import com.icov.app.models.UserMongoDb
 import com.icov.app.databinding.FragmentMyAccountBinding
 import com.icov.app.utils.CommonFunctions
 import io.realm.mongodb.App
@@ -30,7 +30,7 @@ class MyAccountFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMyAccountBinding.inflate(inflater, container, false)
         initializeVariables()
         setupClickListeners()
@@ -50,7 +50,7 @@ class MyAccountFragment : Fragment() {
     private fun initializeVariables() {
         app = App(AppConfiguration.Builder(AppConfig.REALM_APP_ID).build())
         loadingDialog =
-            CommonFunctions.createDialog(requireContext(), R.layout.loading_progress_dialog, false)
+            CommonFunctions.createDialog(requireContext(), R.layout.loading_progress_dialog, R.drawable.progress_circle,false)
     }
 
     private fun setupTheme() {
@@ -71,7 +71,7 @@ class MyAccountFragment : Fragment() {
     private fun logOut() {
         loadingDialog.show()
 
-        app.currentUser()?.logOutAsync() { result ->
+        app.currentUser()?.logOutAsync { result ->
             if (result.isSuccess) {
                 loadingDialog.dismiss()
                 CommonFunctions.startIntent(requireActivity(), RegisterActivity::class.java, true)
