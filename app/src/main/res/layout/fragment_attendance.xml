@@ -13,9 +13,9 @@
         android:background="@color/blue"
         android:orientation="vertical"
         android:paddingStart="24dp"
-        android:paddingTop="40dp"
+        android:paddingTop="15dp"
         android:paddingEnd="24dp"
-        android:paddingBottom="40dp"
+        android:paddingBottom="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -74,8 +74,8 @@
 
     <Button
         android:id="@+id/clock_in_btn"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:background="@drawable/circle_shape"
         android:backgroundTint="@color/green"
         android:enabled="false"
@@ -85,15 +85,15 @@
         android:textSize="20sp"
         android:theme="@style/ButtonGreenTheme"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/calendar_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
     <Button
         android:id="@+id/clock_out_btn"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:background="@drawable/circle_shape"
         android:backgroundTint="@color/red"
         android:enabled="false"
@@ -103,7 +103,7 @@
         android:textSize="20sp"
         android:theme="@style/ButtonRedTheme"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/calendar_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
@@ -116,6 +116,7 @@
         android:text="@string/clock_in_time"
         android:textColor="@color/green"
         android:textSize="18sp"
+        android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/clock_out_btn"
         app:layout_constraintStart_toStartOf="@+id/clock_out_btn"
@@ -129,6 +130,7 @@
         android:text="@string/clock_out_time"
         android:textColor="@color/green"
         android:textSize="18sp"
+        android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/clock_in_time"
         app:layout_constraintStart_toStartOf="@+id/clock_in_time"
@@ -138,11 +140,11 @@
         android:id="@+id/calendar_btn"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="196dp"
         android:background="@drawable/circle_shape"
         android:src="@drawable/ic_calendar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

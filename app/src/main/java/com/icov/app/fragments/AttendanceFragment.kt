@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Dialog
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -32,6 +31,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.bson.Document
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -123,7 +123,10 @@ class AttendanceFragment : Fragment() {
             if (UserMongoDb.checkedOut) {
                 binding.clockOutBtn.isEnabled = false
                 binding.clockOutTime.visibility = View.VISIBLE
-                binding.clockOutTime.text = String.format(getString(R.string.clock_out_time), UserMongoDb.checkedOutTimeToday)
+                binding.clockOutTime.text = String.format(
+                    getString(R.string.clock_out_time),
+                    UserMongoDb.checkedOutTimeToday
+                )
 
             } else {
                 binding.clockOutBtn.isEnabled = true
@@ -134,7 +137,10 @@ class AttendanceFragment : Fragment() {
 
             binding.clockOutBtn.visibility = View.VISIBLE
             binding.clockInTime.visibility = View.VISIBLE
-            binding.clockInTime.text = String.format(getString(R.string.clock_in_time), UserMongoDb.checkedInTimeToday)
+            binding.clockInTime.text = String.format(
+                getString(R.string.clock_in_time),
+                UserMongoDb.checkedInTimeToday
+            )
 
         } else {
             binding.clockInBtn.visibility = View.VISIBLE
@@ -227,7 +233,8 @@ class AttendanceFragment : Fragment() {
 
             if (toClockIn) {
                 val docID: String = UUID.randomUUID().toString()
-
+                val formatter = SimpleDateFormat("dd/MM/yyyy H:mm a", Locale.ITALY)
+                val dateNow: Date = formatter.parse("${binding.currentDate.text} ${binding.currentTime.text} ${binding.amOrPm.text}")
                 val document = Document("user_id", user.id)
                     .append("doc_id", docID)
                     .append("name", UserMongoDb.firstName)
@@ -237,6 +244,10 @@ class AttendanceFragment : Fragment() {
                         "check_in_date",
                         "${binding.currentDay.text}, ${binding.currentDate.text}"
                     )
+                    .append(
+                        "check_in_date_format",
+                        dateNow
+                    )
                     .append("checked_in_latitude", location.latitude)
                     .append("checked_in_longitude", location.longitude)
                     .append("check_out_time", "Not Yet")
@@ -245,7 +256,7 @@ class AttendanceFragment : Fragment() {
 
                 mongoCollection.insertOne(document).getAsync {
                     if (it.isSuccess) {
-                        updateUI(true, location)
+                        updateUI(true, location, dateNow)
                     } else {
                         showError(it.error)
                     }
@@ -265,7 +276,8 @@ class AttendanceFragment : Fragment() {
                                 uniqueDocID = it.getString("doc_id")
                             }
                         }
-
+                        val formatter = SimpleDateFormat("dd/MM/yyyy H:mm a", Locale.ITALY)
+                        val dateNow: Date = formatter.parse("${binding.currentDate.text} ${binding.currentTime.text} ${binding.amOrPm.text}")
                         val docQueryFilter = Document("doc_id", uniqueDocID)
                         val updateDocument = Document("user_id", user.id)
                             .append("doc_id", uniqueDocID)
@@ -273,6 +285,8 @@ class AttendanceFragment : Fragment() {
                             .append("surname", UserMongoDb.surname)
                             .append("check_in_time", UserMongoDb.checkedInTimeToday)
                             .append("check_in_date", UserMongoDb.checkedInDateToday)
+                            .append("check_in_date_format", UserMongoDb.checkedInDateFormat)
+
                             .append("checked_in_latitude", UserMongoDb.checkedInLatitude)
                             .append("checked_in_longitude", UserMongoDb.checkedInLongitude)
                             .append(
@@ -283,6 +297,10 @@ class AttendanceFragment : Fragment() {
                                 "check_out_date",
                                 "${binding.currentDay.text}, ${binding.currentDate.text}"
                             )
+                            .append(
+                                "check_out_date_format",
+                                dateNow
+                            )
                             .append("checked_out_latitude", location.latitude)
                             .append("checked_out_longitude", location.longitude)
                             .append("device_imei", user.deviceId)
@@ -290,7 +308,7 @@ class AttendanceFragment : Fragment() {
 
                         mongoCollection.findOneAndUpdate(docQueryFilter, updateDocument).getAsync {
                             if (it.isSuccess) {
-                                updateUI(false, location)
+                                updateUI(false, location, dateNow)
                             } else {
                                 showError(result.error)
                             }
@@ -306,7 +324,7 @@ class AttendanceFragment : Fragment() {
 
     }
 
-    private fun updateUI(toClockIn: Boolean, location: Location) {
+    private fun updateUI(toClockIn: Boolean, location: Location, dateNow: Date) {
         binding.clockInBtn.visibility = View.GONE
         binding.clockInBtn.isEnabled = false
         binding.clockInTime.visibility = View.VISIBLE
@@ -322,6 +340,8 @@ class AttendanceFragment : Fragment() {
                 "${binding.currentTime.text} ${binding.amOrPm.text}"
             UserMongoDb.checkedInDateToday =
                 "${binding.currentDay.text}, ${binding.currentDate.text}"
+            UserMongoDb.checkedInDateFormat =
+                dateNow
             UserMongoDb.checkedInLatitude = location.latitude
             UserMongoDb.checkedInLongitude = location.longitude
 
@@ -340,10 +360,15 @@ class AttendanceFragment : Fragment() {
                 "${binding.currentTime.text} ${binding.amOrPm.text}"
             UserMongoDb.checkedOutDateToday =
                 "${binding.currentDay.text}, ${binding.currentDate.text}"
+            UserMongoDb.checkedOutDateFormat =
+                dateNow
             UserMongoDb.checkedOutLatitude = location.latitude
             UserMongoDb.checkedOutLongitude = location.longitude
 
-            binding.clockOutTime.text = String.format(getString(R.string.clock_out_time), UserMongoDb.checkedOutTimeToday)
+            binding.clockOutTime.text = String.format(
+                getString(R.string.clock_out_time),
+                UserMongoDb.checkedOutTimeToday
+            )
 
             Toast.makeText(
                 requireContext(),
@@ -351,7 +376,10 @@ class AttendanceFragment : Fragment() {
                 Toast.LENGTH_SHORT
             ).show()
         }
-        binding.clockInTime.text = String.format(getString(R.string.clock_in_time), UserMongoDb.checkedInTimeToday)
+        binding.clockInTime.text = String.format(
+            getString(R.string.clock_in_time),
+            UserMongoDb.checkedInTimeToday
+        )
         loadingDialog.dismiss()
     }
 

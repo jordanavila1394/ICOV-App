@@ -1,5 +1,7 @@
 package com.icov.app.models
 
+import java.util.*
+
 class UserMongoDb {
     companion object {
         var firstName: String? = null
@@ -11,10 +13,13 @@ class UserMongoDb {
         var checkedIn: Boolean = false
         var checkedInTimeToday: String? = null
         var checkedInDateToday: String? = null
+        var checkedInDateFormat: Date? = null
+
 
         var checkedOut: Boolean = false
         var checkedOutTimeToday: String? = null
         var checkedOutDateToday: String? = null
+        var checkedOutDateFormat: Date? = null
 
         var checkedInLatitude: Double? = null
         var checkedInLongitude: Double? = null
